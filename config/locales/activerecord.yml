@@ -1,0 +1,142 @@
+en:
+  activerecord:
+    models:
+      rules:
+        description:
+          overlapping: overlapping
+          blocking_space: blocking_space
+          leaving_halfway: leaving_halfway
+          exceeding_grace_period: exceeding_grace_period
+          unpaid: unpaid
+          parking_expired: parking_expired
+      tickets:
+        statuses:
+          opened: Opened
+          resolved: Resolved
+          issued: Issued
+      ai/log:
+        one: AI Log
+        other: AI Logs
+      message:
+        one: 'Message'
+        templates:
+          dispute_title: 'Dispute message'
+          invoice_title: Park Smart Payment Confirmation
+          invoice_text: |
+            Hi %{user_first_name},
+
+            This message confirms you have paid Park Smart $%{amount} using credit card.
+            It may take a few moments for this transaction to appear in the Transaction History and Messages on your account.
+
+            Payment Details:
+
+            *   Parking Transaction Number: %{parking_session_id}
+            *   Transaction Date: %{payment_details_date}
+            *   Status: Completed
+            *   Payment Transaction Number: %{reference_id}
+            *   Card: %{card_network} %{card_last_four_digits}
+
+            If you did not initiate this, or if you believe this is a mistake, please inform us immediately through [Help@EastonMD.gov](mailto:Help@EastonMD.gov) and [410-822-2525](tel:410-822-2525). Otherwise, you can disregard this email.
+
+            Thank you,
+
+            **Park Smart**
+
+          violation_title: 'Violation message'
+          promotion_title: 'Promotion message'
+      user/notification:
+        one: 'Notification'
+        templates:
+          one: 'None'
+          car_entrance_title: Car entered a parking lot
+          car_entrance_text: Car with LPN %{plate_number}
+          car_parked_title: Car parked on a parking space
+          car_parked_text: Car with LPN %{plate_number}
+          car_exit_title: Car exits the parking lot
+          car_exit_text: Car with LPN %{plate_number}
+          car_left_title: Car leaves the parking space
+          car_left_text: Car with LPN %{plate_number}
+          success_payment_title: User paid successfully
+          success_payment_text: Car with LPN %{plate_number}
+          session_cancelled_title: Parking session cancelled
+          session_cancelled_text: Car with LPN %{plate_number}
+          park_started_title: Parking time started
+          park_started_text: Car with LPN %{plate_number}
+          park_will_expire_title: Parking session is about to expire
+          park_will_expire_text: Car with LPN %{plate_number}
+          park_expired_title: Parking time expired
+          park_expired_text: Car with LPN %{plate_number}
+          payment_reminder_title: Payment reminder for extending parking time
+          payment_reminder_text: Car with LPN %{plate_number}
+          violation_commited_title: Violation committed
+          violation_commited_text: Car with LPN %{plate_number}
+          violation_received_title: Violation ticket received
+          violation_received_text: Car with LPN %{plate_number}
+          violation_resolved_title: Violation ticket resolved
+          violation_resolved_text: Car with LPN %{plate_number}
+          car_switched_title: Car switched parking space
+          car_switched_text: Car with LPN %{plate_number}
+          vehicle_of_interest_title: Vehicle of Interest enters the parking lot
+          vehicle_of_interest_text: Car with LPN %{plate_number}
+          vehicle_becomes_interest_title: Car becomes a vehicle of interest
+          vehicle_becomes_interest_text: Car with LPN %{plate_number}
+          payment_failure_title: User payment failed
+          payment_failure_text: Car with LPN %{plate_number}
+          time_extended_title: You have extended session time
+          time_extended_text: Car with LPN %{plate_number}
+    attributes:
+      credit_card:
+        number: 'credit card number'
+        cvv: 'credit card cvv'
+    errors:
+      messages:
+        missing: "%{attribute} is required"
+        invalid: "your %{attribute} is invalid"
+        taken: "%{attribute} `%{value}` is already taken"
+        blank: "%{attribute} is required"
+        too_long:
+          one: "%{attribute} is too long (maximum is 1 character)"
+          other: "%{attribute} is too long (maximum is %{count} characters)"
+        too_short:
+          one: "%{attribute} is too short (minimum is 1 character)"
+          other: "%{attribute} is too short (minimum is %{count} characters)"
+        wrong_length:
+          one: "%{attribute} is the wrong length (should be 1 character)"
+          other: "%{attribute} is the wrong length (should be %{count} characters)"
+        greater_than_or_equal_to: "%{attribute} Must be greater than or equal to %{count}"
+        inclusion: "%{attribute} is not valid"
+      models:
+        vehicle:
+          attributes:
+            plate_number:
+              invalid: Your plate number is invalid
+        user:
+          attributes:
+            birthday:
+              invalid: You can't use our app if you are under 18 years old
+        address:
+          attributes:
+            state_code:
+              inclusion: 'the state is invalid for the united states'
+        admin:
+          attributes:
+            password: # https://telsoft.atlassian.net/browse/PSAD-412
+              too_long:
+                one: Password must be 7-50 characters only, please try a new one
+                other: Password must be 7-50 characters only, please try a new one
+              too_short:
+                one: Password must be 7-50 characters only, please try a new one
+                other: Password must be 7-50 characters only, please try a new one
+        parking_session:
+          attributes:
+            parking_lot_id:
+              taken: Car is already parked
+        parking_lot:
+          attributes:
+            outline:
+              invalid: "Json file is invalid: %{error}"
+              required: "%{key} is required"
+        camera:
+          attributes:
+            vmarkup:
+              invalid: "Json file is invalid: %{error}"

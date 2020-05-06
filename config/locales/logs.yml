@@ -1,0 +1,8 @@
+en:
+  logs:
+    parking/ticket:
+      admin_id_nil: Unassigned
+      type_of_change:
+        admin_id: Change of assigned officer
+        status: Change of status
+        creation: Ticket Creation

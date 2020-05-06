@@ -1,0 +1,63 @@
+-# frozen_string_literal: true
+body
+
+  .container.my-4
+    .row.d-flex.justify-content-around
+      = form_tag edit_parking_session_path, method: :get
+        = hidden_field_tag :page, 'pay'
+        = hidden_field_tag :pay_mode, 'card'
+        - if params[:pay_mode] == 'card'
+          = button_tag :submit, class: 'btn btn-lg bg-white border-info' do
+            img src="/assets/card.png"
+            div.text-uppercase.text-info
+              | By card
+        - else
+          = button_tag :submit, class: 'btn btn-lg bg-white' do
+            img src="/assets/card.png"
+            div.text-uppercase
+              | By card
+
+      = form_tag edit_parking_session_path, method: :get
+        = hidden_field_tag :page, 'pay'
+        = hidden_field_tag :pay_mode, 'cash'
+        - if params[:pay_mode] == 'cash'
+          = button_tag :submit, class: 'btn btn-lg bg-white border-info' do
+            img src="/assets/cash.png"
+            div.text-uppercase.text-info
+              | In cash
+        - else
+          = button_tag :submit, class: 'btn btn-lg bg-white' do
+            img src="/assets/cash.png"
+            div.text-uppercase
+              | In cash
+
+    .row.my-4.d-flex.justify-content-center
+      = form_tag edit_parking_session_path, method: :get
+        = hidden_field_tag :page, 'done'
+        = button_tag :submit, class: 'btn btn-lg bg-white' do
+          img src="/assets/qr.png"
+          div.text-uppercase.text-muted
+            | OR scan QR code by phone
+
+  .container.d-flex.justify-content-around
+    = link_to :back do
+      button.btn.btn-lg.btn-info
+        i.fa.fa-angle-left
+        span.text-uppercase
+          | Back
+    - if params[:pay_mode] == 'card'
+      = form_tag edit_parking_session_path, method: :get
+        = hidden_field_tag :page, 'card'
+        = button_tag :submit, class: 'btn btn-lg btn-info text-white' do
+          span.text-uppercase
+            | Pay now
+    - elsif params[:pay_mode] == 'cash'
+      = form_tag edit_parking_session_path, method: :get
+        = hidden_field_tag :page, 'cash'
+        = button_tag :submit, class: 'btn btn-lg btn-info' do
+          span.text-uppercase.text-white
+            | Pay now
+    - else
+      button.btn.btn-lg :disabled=true
+        span.text-uppercase.text-white
+          | Pay now

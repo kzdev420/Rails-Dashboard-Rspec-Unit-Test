@@ -1,0 +1,53 @@
+
+body
+
+  = form_tag parking_sessions_path, method: :get, id: 'search_form'
+    .container.my-4.p-5.bg-white
+      .form-group
+        = label_tag 'slot', 'License plate:'
+        = text_field_tag :plate, params[:plate], class: 'form-control'
+      .form-group
+        = label_tag 'slot', 'Parking slot:'
+        = text_field_tag :slot, params[:slot], class: 'form-control'
+      = button_tag :submit, class: 'btn btn-lg float-right' do
+        i.fa.fa-search
+        span
+          |  Search
+
+  - if @parking_sessions
+    .container.my-4.p-5.bg-white
+      table.table.border
+        thead
+          tr
+            td
+              | Parking lot ID
+            td
+              | Parking slot ID
+        tbody
+          - for parking_session in @parking_sessions
+            tr.clickable-row data-href=edit_parking_session_path(parking_session, page: 'select', plate: parking_session.vehicle.plate_number, slot: parking_session.parking_slot.id)
+              td
+                = parking_session.parking_slot.parking_lot.id
+              td
+                = parking_session.parking_slot.id
+
+  .container.my-4.p-5.bg-white
+    .row.m-4.d-flex.justify-content-center.text-uppercase
+      | Parking Slots
+
+    .row
+      table.table
+        thead
+          tr
+            th
+              | Slot
+        tbody
+          - for parking_slot in @parking_slots do
+            - if parking_slot.vehicle_id == nil
+              tr.clickable-row data-href=parking_sessions_path(slot: parking_slot.id)
+                td
+                  = parking_slot.id
+            - else
+              tr.bg-success
+                td
+                  = parking_slot.id

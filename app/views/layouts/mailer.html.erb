@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+
+        /* What it does: Remove spaces around the email design added by some email clients. */
+        /* Beware: It can remove the padding / margin and add a background color to the compose a reply window. */
+        html,
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            margin: 0 auto !important;
+            padding: 0 !important;
+            height: 100% !important;
+            width: 100% !important;
+        }
+
+        /* What it does: Stops email clients resizing small text. */
+        * {
+            -ms-text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        a {
+            text-decoration: none
+        }
+        /* What it does: Centers email on Android 4.4 */
+        div[style*="margin: 16px 0"] {
+            margin:0 !important;
+        }
+
+        /* What it does: Stops Outlook from adding extra spacing to tables. */
+        table,
+        td {
+            mso-table-lspace: 0pt !important;
+            mso-table-rspace: 0pt !important;
+        }
+        td {
+          padding: 0px 20px 5px 20px;
+          font-size: 15px;
+          line-height: 20px;
+          color: rgba(36,46,66, 0.9);
+          text-align: left;
+
+        }
+
+        td p {
+          margin: 10px
+        }
+
+        strong {
+          color: #242E42 !important;
+        }
+
+        /* What it does: Fixes webkit padding issue. Fix for Yahoo mail table alignment bug. Applies table-layout to the first 2 tables then removes for anything nested deeper. */
+        table {
+            border-spacing: 0 !important;
+            border-collapse: collapse !important;
+            table-layout: fixed !important;
+            margin: 0 auto !important;
+        }
+        table table table {
+            table-layout: auto;
+        }
+
+        /* What it does: Uses a better rendering method when resizing images in IE. */
+        img {
+            -ms-interpolation-mode:bicubic;
+        }
+
+        /* What it does: A work-around for email clients meddling in triggered links. */
+        *[x-apple-data-detectors],  /* iOS */
+        .x-gmail-data-detectors,    /* Gmail */
+        .x-gmail-data-detectors *,
+        .aBn {
+            border-bottom: 0 !important;
+            cursor: default !important;
+            color: inherit !important;
+            text-decoration: none !important;
+            font-size: inherit !important;
+            font-family: inherit !important;
+            font-weight: inherit !important;
+            line-height: inherit !important;
+        }
+
+        /* What it does: Prevents Gmail from displaying an download button on large, non-linked images. */
+        .a6S {
+            display: none !important;
+            opacity: 0.01 !important;
+        }
+        /* If the above doesn't work, add a .g-img class to any image in question. */
+        img.g-img + div {
+            display:none !important;
+           }
+
+        /* What it does: Prevents underlining the button text in Windows 10 */
+        .button-link {
+            text-decoration: none !important;
+        }
+
+        /* What it does: Removes right gutter in Gmail iOS app: https://github.com/TedGoas/Cerberus/issues/89  */
+        /* Create one of these media queries for each additional viewport size you'd like to fix */
+        /* Thanks to Eric Lepetit @ericlepetitsf) for help troubleshooting */
+        @media only screen and (min-device-width: 375px) and (max-device-width: 413px) { /* iPhone 6 and 6+ */
+            .email-container {
+                min-width: 375px !important;
+            }
+        }
+
+    </style>
+
+    <!-- Progressive Enhancements -->
+    <style>
+
+        /* Media Queries */
+        @media screen and (max-width: 480px) {
+
+            /* What it does: Adjust typography on small screens to improve readability */
+            .email-container p {
+                font-size: 17px !important;
+                line-height: 22px !important;
+            }
+        }
+
+        center {
+          padding-top: 40px;
+          padding-bottom: 40px;
+          width: 100%;
+          background: #f9fbfc;
+          text-align: left;
+        }
+
+        .card {
+          border-top: 4px solid #3A9CED;
+          background: white;
+          box-shadow: 1px 3px 9px rgba(0, 0, 0, 0.1);
+          padding-bottom: 40px;
+        }
+
+        .logo img {
+            vertical-align: middle;
+            margin-right: 8px
+        }
+
+        .logo span {
+          color: #4a4d52;
+          font-size: 18px;
+        }
+
+        .button {
+            display: inline-block;
+            margin: 10px 8px;
+            padding: .7rem 3rem !important;
+            border-radius: 0.25rem;
+            background: #27CEBB;
+            color: white;
+        }
+
+
+    </style>
+
+
+  </head>
+
+  <body width="100%"  style="margin: 0; mso-line-height-rule: exactly;">
+    <center>
+
+        <!-- Visually Hidden Preheader Text : BEGIN -->
+        <div style="display:none;font-size:1px;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;mso-hide:all;font-family: sans-serif;">
+        </div>
+        <!-- Visually Hidden Preheader Text : END -->
+
+        <div style="max-width: 680px; margin: auto;" class="email-container">
+            <!-- Email Body : BEGIN -->
+            <table cellspacing="0" cellpadding="0" width="100%" style="max-width: 680px;" class="email-container">
+
+                <tr>
+                    <td class="card" >
+                        <table cellspacing="0" cellpadding="0" width="100%">
+                          <tr>
+                            <td>
+                                <table cellspacing="0" cellpadding="0" width="100%">
+                                    <tr class="logo">
+                                        <td style="padding: 40px 0; text-align: left;">
+                                            <%= image_tag 'email_logo.png', width: '70', height: '70', alt: "logo"%>
+                                            <span>Park Smart</span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                          </tr>
+                          <%= yield %>
+                        </table>
+                    </td>
+                </tr>
+                <!-- HERO : END -->
+
+            </table>
+
+        </div>
+
+    </center>
+</body>
+</html>

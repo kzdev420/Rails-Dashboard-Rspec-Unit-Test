@@ -1,0 +1,49 @@
+en:
+  user_mailer:
+    welcome_letter:
+      subject: 'Hello'
+  admin_mailer:
+    user_created:
+      subject: New dashboard user was created
+    welcome_letter:
+      subject: Welcome to parking dashboard
+    parking_lot_created:
+      subject: New parking lot was created
+    parking_lot_updated:
+      subject: Parking lot was updated
+    assigned_to_parking_lot:
+      subject: You were assigned to parking lot
+    unassigned_from_parking_lot:
+      subject: You were unassigned from parking lot
+    agency_created:
+      subject: New agency was created
+    assigned_to_agency:
+      subject: You were assigned to agency
+  parking_admin_mailer:
+    expired_session:
+      subject: 'Expired parking session was detected'
+    unrecognized_entrance:
+      subject: 'Unrecognized vehicle'
+    unconfirmed_exit:
+      subject: 'Unrecognized exit'
+  parking_user_mailer:
+    park_expired:
+      subject: 'Parking Session Expired - Vehicle %{plate_number}'
+    car_entrance:
+      subject: 'Parking session started'
+    car_exit:
+      subject: 'Vehicle Exits Parking Lot'
+    park_will_expire:
+      subject: 'Parking Session Expiration Reminder'
+    time_extended:
+      subject: 'Parking Session has been extended'
+    car_left:
+      subject: 'Your car left parking space'
+    car_parked:
+      subject: 'Parking Confirmation - Vehicle %{plate_number}'
+    session_cancelled:
+      subject: 'Parking session cancelled - Vehicle %{plate_number}'
+  violation_mailer:
+    commited:
+        subject: 'Violation commited'
+

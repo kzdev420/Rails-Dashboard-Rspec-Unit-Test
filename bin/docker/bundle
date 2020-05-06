@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" > /dev/null && pwd )"
+DIR="$( readlink -f $DIR/../.. )"
+
+WORKDIR=/opt/parkings
+
+docker run --rm -it \
+  --workdir $WORKDIR \
+  --volume $DIR:$WORKDIR \
+  --env BUNDLE_APP_CONFIG=$WORKDIR/.bundle \
+  ruby:2.5 bin/bundle "$@"

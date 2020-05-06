@@ -1,0 +1,35 @@
+
+<% is_kiosk_module = request.url.include?('ksk') # to hide backoffice menu from backoffice users %>
+<nav class="navigation" role="navigation">
+  <% unless is_kiosk_module %>
+    <a class="navigation__link" href='/dashboard/users'>
+      Users
+    </a>
+    <a class="navigation__link" href='/dashboard/ai/tokens'>
+      AI tokens
+    </a>
+    <%= link_to 'Roles', dashboard_roles_path, class: 'navigation__link' %>
+    <%= link_to 'Agencies', dashboard_agencies_path, class: 'navigation__link' %>
+    <%= link_to 'Cameras', dashboard_cameras_path, class: 'navigation__link' %>
+    <%= link_to 'Sidekiq', sidekiq_web_path, class: 'navigation__link' %>
+    <%= link_to 'Kiosks', dashboard_kiosks_path, class: 'navigation__link' %>
+    <%= link_to 'Payments', dashboard_payments_path, class: 'navigation__link' %>
+    <%= link_to 'Manufacturers', dashboard_manufacturers_path, class: 'navigation__link' %>
+    <hr>
+  <% end %>
+  <%= link_to 'Parking Slots', dashboard_parking_slots_path, class: 'navigation__link' %>
+  <%= link_to 'Parking sessions', dashboard_parking_sessions_path, class: 'navigation__link' %>
+  <%= link_to 'Vehicles', dashboard_vehicles_path, class: 'navigation__link' %>
+  <a class="navigation__link" href='/dashboard/ksk/parking_lots'>
+    Parking lots
+  </a>
+  <a class="navigation__link" href='/dashboard/ksk/tokens'>
+    Kiosk tokens
+  </a>
+  <a class="navigation__link text-info" target="_blank" href='/api-docs'>
+    API docs
+  </a>
+  <% if admin_signed_in? %>
+    <%= link_to('Sign out', destroy_admin_session_path, method: :delete) %>
+  <% end %>
+</nav>

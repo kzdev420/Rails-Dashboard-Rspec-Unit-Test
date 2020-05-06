@@ -1,0 +1,20 @@
+tr
+  td
+    p Hi #{@user.first_name},
+    p This email confirms you have paid Park Smart $#{@amount/100.to_f} using credit card.
+    p It may take a few moments for this transaction to appear in the Transaction History and Messages on your account.
+    p Payment Details:
+    ul
+      li Parking Transaction Number: #{@parking_session.id}
+      li Transaction Date: #{formatted_datetime(@payment_date)}
+      li Status: Completed
+      li Payment Transaction Number: #{@reference_id}
+      li Card: #{@card_network} #{@card_last_four_digits}
+tr
+  td
+    p If you did not initiate this, or if you believe this is a mistake, please inform us immediately through <a href = "mailto:Help@EastonMD.gov">Help@EastonMD.gov</a> and <a href="tel:410-822-2525">410-822-2525</a>. Otherwise, you can disregard this email.
+    p
+      | Thank you,
+    p
+      b Park Smart
+

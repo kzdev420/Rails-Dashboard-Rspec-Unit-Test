@@ -1,0 +1,116 @@
+-# frozen_string_literal: true
+body
+
+  .container.my-4
+    = form_tag edit_parking_session_path, method: :get, id: 'check_form'
+      = hidden_field_tag :page, params[:page]
+
+      .container.p-5.bg-white
+        .form-group
+          .form-control.border-0
+            = label_tag 'plate', 'Enter your license plate', class: 'text-uppercase'
+          .form-control.border-0
+            - if @vehicle != nil
+              = text_field_tag :plate, params[:plate], class: 'w-75 mr-3', readonly: true
+              button.btn.btn-sm.btn-outline-secondary disabled="disabled"
+                span.text-uppercase Edit
+                i.fa.fa-pencil
+            - else
+              = text_field_tag :plate, params[:plate], class: 'w-75 mr-3'
+              = submit_tag 'Check', class: 'btn btn-sm btn-success text-uppercase'
+        .form-group
+          .form-control.border-0
+            = label_tag 'slot', 'Enter your parking slot id', class: 'text-uppercase'
+          .form-control.border-0
+            - if @parking_slot != nil
+              = text_field_tag :slot, params[:slot], class: 'w-75 mr-3', readonly: true
+              button.btn.btn-sm.btn-outline-secondary disabled="disabled"
+                span.text-uppercase Edit
+                i.fa.fa-pencil
+            - else
+              = text_field_tag :slot, params[:slot], class: 'w-75 mr-3'
+              = submit_tag 'Check', class: 'btn btn-sm btn-success text-uppercase'
+
+      .container.mt-4.p-5.bg-white
+        table.table.table-borderless
+          tbody
+            tr
+              td
+                | Parking lot name:
+              td
+                - if @parking_slot != nil
+                  = @parking_lot.address
+                  | #
+                  = @parking_lot.id
+            tr
+              td
+                | Time of entry:
+              td
+                = formatted_datetime(Time.now)
+            tr
+              td
+                | License plate:
+              td
+                - if @vehicle != nil
+                  = @vehicle.plate_number
+            tr
+              td
+                | Manufacter:
+              td
+                - if @vehicle != nil
+                  = @vehicle.vehicle_type
+                  |
+                  = @vehicle.color
+            tr
+              td
+                | Parking slot ID:
+              td
+                - if @parking_slot != nil
+                  = @parking_slot.id
+            tr
+              td
+                = label_tag 'hours', 'Number of hours:'
+              td
+                - if params[:hours].to_i > 1
+                  = button_tag '-', type: 'button', class: 'btn btn-sm btn-info', id: 'hours_minus'
+                - else
+                  = button_tag '-', type: 'button', class: 'btn btn-sm', id: 'hours_minus', disabled: true
+                = number_field_tag :hours, params[:hours], class: "mx-3", readonly: true
+                = button_tag '+', type: 'button', class: 'btn btn-sm btn-info', id: 'hours_plus'
+            tr
+              td
+                | Parking zone price:
+              td
+                - if @parking_slot != nil
+                  | $
+                  = @parking_lot.rate
+                  | /hour
+            tr
+              td
+                | Total amount:
+              td.total-amount
+                - if @parking_slot != nil && @parking_slot.parking_lot
+                  | $
+                  = @parking_slot.parking_lot.calc_fee_by_hours(params[:hours])
+
+  .container.d-flex.justify-content-around
+    = link_to :back do
+      button.btn.btn-lg.btn-info
+        i.fa.fa-angle-left
+        span.text-uppercase
+          |  Back
+    - if @vehicle != nil && @parking_slot != nil
+      = form_tag parking_session_path, method: :patch
+        = hidden_field_tag :plate, params[:plate]
+        = hidden_field_tag :slot, params[:slot]
+        = hidden_field_tag :hours, params[:hours]
+
+        = button_tag :submit, class: 'btn btn-lg btn-success text-white' do
+          span.text-uppercase
+            | Proceed
+          i.fa.fa-angle-right
+    - else
+      button.btn.btn-lg.text-white
+        span.text-uppercase
+          | Proceed
+        i.fa.fa-angle-right

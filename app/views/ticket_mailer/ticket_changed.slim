@@ -1,0 +1,6 @@
+tr
+  td
+    p
+      = "Hi, #{@admin.username}"
+    p
+      = "Ticket ##{@ticket.id} (#{@ticket.status}) #{t(".#{@change}", from: @from, to: @to)}"

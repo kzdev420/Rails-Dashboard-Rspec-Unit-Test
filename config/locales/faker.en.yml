@@ -1,0 +1,6 @@
+en-US:
+  faker:
+    address:
+      default_country: [United States, United States of America, USA]
+      city: [New York, Los Angeles, Chicago, Houston, Philadelphia, Phoenix, San Antonio, San Diego, Dallas, San Jose, Austin, Indianapolis, Jacksonville, San Francisco, Columbus, Charlotte, Fort Worth, Detroit, El Paso, Memphis, Seattle, Denver, Washington, Boston, Nashville-Davidson, Baltimore, Oklahoma City, Portland, Las Vegas, Milwaukee, Albuquerque, Tucson, Fresno, Sacramento, Long Beach, Kansas City, Mesa, Virginia Beach, Atlanta]
+      country: [United States]

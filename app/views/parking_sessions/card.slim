@@ -1,0 +1,30 @@
+-# frozen_string_literal: true
+body
+
+  .container.my-4.text-center
+    | Please insert a card (for payment are accepted VISA, PayPass, Mastercard)
+
+  .container.my-4.p-5.bg-white
+
+    .row.d-flex.justify-content-center.align-items-end
+      | introduced
+      h1.m-0
+        | $0
+      | /$0,5
+    .row.d-flex.justify-content-center
+      = form_tag edit_parking_session_path, method: :get
+        = hidden_field_tag :page, 'done'
+        = button_tag :submit, class: 'btn btn-lg bg-white' do
+          img src="/assets/push_card.png"
+
+  .container.d-flex.justify-content-around
+    = link_to :back do
+      button.btn.btn-lg.btn-info
+        i.fa.fa-angle-left
+        span.text-uppercase
+          | Back
+    = form_tag edit_parking_session_path, method: :get
+      = hidden_field_tag :page, 'done'
+      = button_tag :submit, class: 'btn btn-lg bg-white' do
+        span.text-uppercase
+          | Done

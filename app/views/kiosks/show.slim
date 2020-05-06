@@ -1,0 +1,31 @@
+-# frozen_string_literal: true
+body
+
+  .container.my-4.bg-white
+    .row.py-4
+      .col-12.d-flex.justify-content-center
+        h1.text-uppercase
+          | Empty slots
+    .row.py-5
+      .col-12.px-5.d-flex.justify-content-center
+        .p-5.display-1.text-info.bg-light
+          = @empty_slots_count
+          | /
+          = @total_slots_count
+
+  .container.bg-light
+    .row
+      .col-12.d-flex.justify-content-center
+        h6
+          | Parking price
+
+
+  .container.d-flex.justify-content-around
+    = link_to edit_parking_session_path(@parking_session, page: 'enter', plate: @parking_session.vehicle.plate_number, slot: @parking_session.parking_slot.id, hours: 1) do
+      button.btn.btn-lg.btn-info
+        span
+          | Enter number of the plates
+    = link_to edit_parking_session_path(@parking_session, page: 'select', plate: @parking_session.vehicle.plate_number, slot: @parking_session.parking_slot.id) do
+      button.btn.btn-lg.btn-info
+        span
+          | Select on the map

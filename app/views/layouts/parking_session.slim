@@ -1,0 +1,25 @@
+-# frozen_string_literal: true
+doctype html
+html
+  head
+    title Parking Session
+    = stylesheet_link_tag "application", media: "all"
+    = javascript_include_tag "kiosk"
+
+  body.bg-light
+    header.container-fluid.p-3.text-white.bg-info
+      .container
+        .row
+          .col-6
+            h1.text-uppercase.display-3
+              | Smart Parking
+            - if @parking_lot
+              h4
+                = @parking_lot.address
+          .col-6.border-bottom.border-white.text-right
+            h4.text-uppercase
+              | Today
+            h4
+              = formatted_datetime(Time.now)
+    .main
+      == yield

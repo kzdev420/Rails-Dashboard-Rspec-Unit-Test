@@ -1,0 +1,83 @@
+# inherit_from: .rubocop_todo.yml
+AllCops:
+  DisabledByDefault: true
+
+Layout/EmptyLines:
+  Exclude:
+    - 'bin/setup'
+
+# Use `{ a: 1 }` not `{a:1}`.
+Layout/SpaceInsideHashLiteralBraces:
+  EnforcedStyle: space
+
+# Braces around single line blocks and # do..end around multi-line blocks.
+Style/BlockDelimiters:
+  EnforcedStyle: line_count_based
+
+Layout/EmptyLineBetweenDefs:
+  Enabled: true
+
+Layout/SpaceAroundBlockParameters:
+  EnforcedStyleInsidePipes: no_space
+
+Layout/SpaceBeforeBlockBraces:
+  EnforcedStyle: space
+
+Layout/SpaceInsideBlockBraces:
+  EnforcedStyle: space
+
+Layout/SpaceInsideHashLiteralBraces:
+  EnforcedStyle: space
+
+# 1_000_000 instead of 1000000
+Style/NumericLiterals:
+  Enabled: true
+  Exclude:
+    - 'db/schema.rb'
+
+# Align comments with method definitions.
+Layout/CommentIndentation:
+  Enabled: true
+
+# Use CamelCase for classes and modules
+Naming/ClassAndModuleCamelCase:
+  Enabled: true
+
+Naming/MethodName:
+  EnforcedStyle: snake_case
+
+Naming/VariableName:
+  EnforcedStyle: snake_case
+
+Style/AndOr:
+  EnforcedStyle: conditionals
+
+Naming/AsciiIdentifiers:
+  Enabled: true
+
+Naming/PredicateName:
+  Enabled: true
+
+# Use snake_case for source file names
+Naming/FileName:
+  Enabled: true
+
+# Use Ruby >= 1.9 syntax for hashes. Prefer { a: :b } over { :a => :b }.
+Style/HashSyntax:
+  Enabled: true
+
+# Two spaces, no tabs (for indentation).
+Layout/Tab:
+  IndentationWidth: 2
+
+# No trailing whitespace.
+Layout/TrailingWhitespace:
+  Enabled: true
+
+# Use my_method(my_arg) not my_method( my_arg ) or my_method my_arg.
+Lint/RequireParentheses:
+  Enabled: true
+
+Layout/IndentationConsistency:
+  Enabled: true
+  EnforcedStyle: rails

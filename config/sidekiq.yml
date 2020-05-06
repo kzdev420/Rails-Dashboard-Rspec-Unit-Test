@@ -1,0 +1,14 @@
+default: &default
+  verbose: false
+  pidfile: ./tmp/pids/sidekiq.pid
+  queues:
+    - [mailers, 4]
+    - [images, 3]
+    - ai
+    - state
+    - active_storage_analyzer
+development:
+  <<: *default
+production:
+  <<: *default
+  logfile: ./log/sidekiq.log

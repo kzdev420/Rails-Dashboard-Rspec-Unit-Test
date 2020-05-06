@@ -1,0 +1,34 @@
+
+tr
+  td
+    p
+      | Hi #{@first_name},
+
+tr
+  td
+    p
+      | This is to inform you that your car with plate number
+      strong  #{@plate_number}
+      |  has been detected in
+      strong  #{@parking_lot.name}
+      |  and successfully parked at parking slot ##{@session.parking_slot.name} .
+
+tr
+  td
+    ul
+      li Parking transaction number: #{@session.id}
+      li Date: #{formatted_datetime(@session.parked_at, false, true)}
+      li Time in: #{formatted_datetime(@session.parked_at, true, false)}
+      li Expected time out: #{formatted_datetime(@session.check_out)}
+      li Parking rate: $#{@parking_lot.rate}
+
+tr
+  td
+    p You may extend your parking time #{@parking_lot.parked / 60} minutes before the expected time out, or before that.
+tr
+  td
+    p If you did not initiate this, or if you believe this is a mistake, please inform us immediately through <a href = "mailto:Help@EastonMD.gov">Help@EastonMD.gov</a> and <a href="tel:410-822-2525">410-822-2525</a>. Otherwise, you can disregard this email.
+    p
+      | Thank you,
+    p
+      b Park Smart

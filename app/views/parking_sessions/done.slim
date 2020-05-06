@@ -1,0 +1,19 @@
+-# frozen_string_literal: true
+body
+
+  .container.my-4.py-5.bg-white
+    .row.d-flex.justify-content-center
+      i.fa.fa-check-circle.fa-5x.text-success
+    .row.d-flex.justify-content-center
+      h5.text-uppercase
+        | Your payment was successfull
+  .container.my-4
+    i.fa.fa-exclamation-circle.text-info.pr-2
+    span.text-body
+      | Free parking by the city is available for up-to 3 hours including all free parking facilities across the town. You have consumed 02.00 hrs on July 25, 2018
+
+  .container.d-flex.justify-content-center
+    = link_to action: :index do
+      button.btn.btn-lg.btn-success
+        span.text-uppercase.text-white
+          | Done

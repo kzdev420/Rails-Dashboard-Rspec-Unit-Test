@@ -1,0 +1,165 @@
+en:
+  active_interaction:
+    errors:
+      messages:
+        invalid_nested: "%{attribute} has an invalid nested value (%{name} => %{value})"
+        invalid_type: "%{attribute} is not a valid type"
+        missing: "%{attribute} is required"
+        invalid: "your %{attribute} is invalid"
+        taken: "%{attribute} `%{value}` is already taken"
+        blank: "%{attribute} can't be blank"
+        improbable_phone: "your %{attribute} is an invalid number"
+        too_long:
+          one: "%{attribute} is too long (maximum is 1 character)"
+          other: "%{attribute} is too long (maximum is %{count} characters)"
+        too_short:
+          one: "%{attribute} is too short (minimum is 1 character)"
+          other: "%{attribute} is too short (minimum is %{count} characters)"
+        wrong_length:
+          one: "%{attribute} is the wrong length (should be 1 character)"
+          other: "%{attribute} is the wrong length (should be %{count} characters)"
+      models:
+        users/update_settings:
+            attributes:
+              credit_card:
+                duplicated: Credit card already saved
+              base:
+                has_active_session: The car %{vehicle_plate_number} has active parking session
+        parking_sessions/car_exit:
+          attributes:
+            base:
+              need_more_details: Vehicle plate number or its images should be presented
+        parking_sessions/car_entrance:
+          attributes:
+            base:
+             need_more_details: 'You need to send plate number or car image'
+            parking_lot_id:
+              taken: Car is already parked
+        users/sign_in:
+          attributes:
+            base:
+              unconfirmed_email: Account is not yet confirmed, please confirm it
+            email:
+              invalid: Incorrect Email Address, please try again
+            password:
+              invalid: Incorrect password, please try again
+        parking_sessions/confirm:
+          attributes:
+            check_out:
+              invalid: Must be greater than parking session check_in
+            vehicle:
+              invalid: Parking session vehicle was not found
+        parking_sessions/base_event:
+          attributes:
+            uuid: Invalid uuid. Parking session was not found
+            vehicle:
+              has_active_session: Car with ID %{id}(LPN %{plate_number}) has an active parking session at '%{parking_lot}' with UUID %{uuid}
+            parking_session:
+              finished: The session is already finished
+            parking_slot_id:
+              not_found: Parking slot was not found
+              occupied: Parking slot is already occupied
+        parking_sessions/violation_commited:
+          attributes:
+            base:
+              car_with_permit: Vehicle plate number has a permit
+        parking_sessions/car_parked:
+          attributes:
+            base:
+              need_more_details: Vehicle plate number or its images should be presented
+            parking_slot_id:
+              occupied: Parking Slot occupied
+            uuid:
+              not_found:
+        parking_sessions/car_left:
+          attributes:
+            base:
+              need_more_details: Vehicle plate number or its images should be presented
+            session:
+              not_parked: The car is not parked
+            parking_slot_id:
+              free: Parking slot is already free
+        parking_sessions/entrance:
+          attributes:
+            base:
+              need_more_details: Vehicle plate number or its images should be presented
+        parking_sessions/extend:
+          attributes:
+            check_out:
+              less_than_previous_value: Must be greater than previous check_out value
+              less_than_check_in: Must be greater than check_in
+        places/create:
+          attributes:
+            place:
+              more_than_max_count: "You can add maximum %{max} places"
+        parking/tickets/update:
+          attributes:
+            remark:
+              empty: 'Please remark about the reason for change of status'
+        vehicles/create:
+          attributes:
+            base:
+              more_than_max_count: 15 vehicles max
+              already_taken_by_another_account: This plate number %{plate_number} is already taken by another account
+        vehicles/update:
+          attributes:
+            base:
+              has_active_session: The car %{vehicle_plate_number} has an active parking session and it cannot be updated
+        vehicles/delete:
+          attributes:
+            base:
+              has_active_session: The car %{vehicle_plate_number} has active parking session
+        admins/sign_in:
+          attributes:
+            base:
+              account_not_active: Your account is suspended, please contact the admin
+            username:
+              invalid_username: Username is incorrect, please try a new one
+              invalid_email: Email address is incorrect, please try a new one
+            password:
+              invalid: Password is incorrect, please try a new one
+        admins/reset_password_mail:
+          attributes:
+            email:
+              invalid: Email address is incorrect, please try a new one
+            username:
+              invalid: Username is incorrect, please try a new one
+        admins/create:
+          attributes:
+            role:
+              blank: User Role is missing, please select one
+              missing: User Role is missing, please select one
+            email:
+              invalid: Invalid Email Address format, please try again
+            phone:
+              improbable_phone: Invalid phone number format, please try again
+            username:
+              taken: Username already exists, please try a new one
+              blank: Invalid username length, must be between 7-20
+              too_short:
+                one: Invalid username length, must be between 7-20
+                other: Invalid username length, must be between 7-20
+              wrong_length:
+                one: Invalid username length, must be between 7-20
+                other: Invalid username length, must be between 7-20
+        parking_lots/base:
+          attributes:
+            parking_admin_id:
+              not_found: Specified parking admin was not found
+            town_manager_id:
+              not_found: Specified town manager was not found
+        agencies/base:
+          attributes:
+            officer_ids:
+              not_found: Specified officers were not found
+            manager_id:
+              not_found: Specified manager was not found
+            town_manager_id:
+              not_found: Specified town manager was not found
+          # "."
+          # "."
+          # "Invalid username format, use only letters and numbers."
+          # "Invalid Email Address format, please try again."
+          # "User Role is missing, please select one."
+          # "Invalid phone number format, please try again."
+          # "Invalid password length, must be between 7-50".

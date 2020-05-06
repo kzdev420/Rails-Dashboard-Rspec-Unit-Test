@@ -1,0 +1,89 @@
+-# frozen_string_literal: true
+body
+
+  .container.my-4
+    = form_tag edit_parking_session_path, method: :get, id: 'check_form'
+      = hidden_field_tag :page, params[:page]
+      = hidden_field_tag :plate, params[:plate]
+      = hidden_field_tag :slot, params[:slot]
+
+      .container.p-5.bg-white
+        .form-group
+          .form-control.border-0.d-flex.justify-content-center
+            = label_tag 'hours', 'Check number of hours', class: 'text-uppercase'
+          = select_tag :hours, options_for_select(@hours_list, params[:hours]), include_blank: "Check from list", class: 'text-uppercase form-control w-75 d-inline mr-3'
+          - if @parking_slot != nil && params[:hours].to_i > 0
+            | $
+            = @parking_lot.calc_fee_by_hours(params[:hours])
+            .my-4
+              i.fa.fa-exclamation-circle.text-info.pr-2
+              span.text-body
+                | This parking is free for 3 hours, and after that you will get the citation
+
+      .container.mt-4.p-5.bg-white
+        .row.m-4.d-flex.justify-content-center.text-uppercase
+          | Check parking slot
+        .row.my-4.d-flex.justify-content-end
+          table.table.text-center.w-25
+            tr
+              td.
+                = @parking_lot.parking_slots.count - @parking_lot.parking_slots.where(vehicle_id: nil).count
+              td
+                = @parking_lot.parking_slots.where(vehicle_id: nil).count
+            tr
+              td.border.bg-success
+              td.border.bg-white
+            tr
+              td
+                | Occupied
+              td
+                | Empty
+        / .row
+        /   - for parking_zone in @parking_lot.parking_zones do
+        /     .col-4
+        /       table.table
+        /         thead
+        /           tr
+        /             th
+        /               | Zone
+        /               = parking_zone.id
+        /         tbody
+        /           - for parking_slot in parking_zone.parking_slots do
+        /             - if parking_slot.vehicle_id == nil
+        /               - if parking_slot.id == params[:slot].to_i
+        /                 tr.bg-danger.border.border-info.selected_slot
+        /                   td
+        /                     = parking_zone.name
+        /                     | -
+        /                     = parking_slot.id
+        /               - else
+        /                 tr.clickable-row data-href=edit_parking_session_path(@parking_session, page: 'select', plate: params[:plate], slot: parking_slot.id, hours: params[:hours])
+        /                   td
+        /                     = parking_zone.name
+        /                     | -
+        /                     = parking_slot.id
+        /             - else
+        /               tr.bg-success
+        /                 td
+        /                   = parking_zone.name
+        /                   | -
+        /                   = parking_slot.id
+
+  .container.d-flex.justify-content-around
+    = link_to :back do
+      button.btn.btn-lg.btn-info
+        i.fa.fa-angle-left
+        span.text-uppercase
+          |  Back
+    - if @parking_slot != nil && params[:hours].to_i > 0
+      = form_tag parking_session_path, method: :patch
+        = hidden_field_tag :plate, params[:plate]
+        = hidden_field_tag :slot, @parking_slot.id
+        = hidden_field_tag :hours, params[:hours]
+        = button_tag :submit, class: 'btn btn-lg btn-info' do
+          span.text-uppercase.text-white
+            | Pay now
+    - else
+      button.btn.btn-lg
+        span.text-uppercase.text-white
+          | Pay now

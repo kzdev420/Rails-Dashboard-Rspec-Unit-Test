@@ -1,0 +1,23 @@
+en:
+  api:
+    errors:
+      empty_email: Please provide an email address
+      invalid_email: Email Address invalid. Try again
+      confirmed_user: Account is already confirmed
+      param_is_required: "%{attribute} is required"
+      not_found: Not found
+      wrong_access: You don't have permissions to process that action
+      unauthorized: Unauthorized
+      forbidden: Forbidden (not enough rights)
+      bad_request: Bad request
+      unconfirmed_user: User must be confirmed
+      parking_lot_not_found: Parking lot is not existed
+      role_not_found: Role is missing, please select one
+      account_suspended: Your account is suspended, please contact the admin
+      ksk:
+        session_not_found: Parking session not found! Check your parking slot number or plate number
+        session_with_ticket:
+          base: Parking session with parking violation! Check with your closest officer
+          exceeding_grace_period: Time to confirm parking session expired! Check with your closest officer
+      ai:
+        unknown_event: "Specified event type is not valid! Possible events: %{events}"

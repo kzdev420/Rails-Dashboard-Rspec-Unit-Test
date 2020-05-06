@@ -1,0 +1,27 @@
+-# frozen_string_literal: true
+doctype html
+html
+  head
+    title Kiosk
+    = stylesheet_link_tag "application", media: "all"
+    = javascript_include_tag "kiosk"
+
+  body.bg-light
+    header.container-fluid.p-3.text-white.bg-info
+      .container
+        .row
+          .col-4
+          .col-8
+            .row
+              h1.text-uppercase.display-3
+                | Smart Parking
+            .row
+              h4
+                = @parking_lot.address
+        .row.border-top.border-white.text-right.p-3
+          h4.text-uppercase.mr-3
+            | Today:
+          h4
+            = formatted_datetime(Time.now)
+    .main
+      == yield

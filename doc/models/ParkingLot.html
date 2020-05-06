@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: ParkingLot
+  
+    &mdash; Documentation by YARD 0.9.22
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "ParkingLot";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index (P)</a> &raquo;
+    
+    
+    <span class="title">ParkingLot</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: ParkingLot
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="ApplicationRecord.html" title="ApplicationRecord (class)">ApplicationRecord</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">ActiveRecord::Base</li>
+          
+            <li class="next"><span class='object_link'><a href="ApplicationRecord.html" title="ApplicationRecord (class)">ApplicationRecord</a></span></li>
+          
+            <li class="next">ParkingLot</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  <dl>
+      <dt>Includes:</dt>
+      <dd>ActiveStorageSupport::SupportForBase64</dd>
+  </dl>
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>app/models/parking_lot.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Model to handle each parking lot on the system.</p>
+
+<h2>Table&#39;s Columns</h2>
+
+<ul>
+<li>email =&gt; [string] Email to whom the system will reach on every event that occurs on the parking lot</li>
+<li>name =&gt; [string] Name tag for the parking lot</li>
+<li>phone =&gt; [string] Contact number</li>
+<li>avatar =&gt; [string] Profile photo</li>
+<li>status =&gt; [integer] active or suspended</li>
+<li>outline =&gt; [json] JSON attribute with coordinates point to handle parking lot drawing on the Kiosk app.
+                For more information see <a href="https://telsoft.atlassian.net/browse/PSAD-491" target="_parent" title="PSAD-491">PSAD-491</a></li>
+<li>created_at =&gt; [datetime]</li>
+<li>updated_at =&gt; [datetime]</li>
+</ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="OUTLINE_KEYS-constant" class="">OUTLINE_KEYS =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Keys on the outline file</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='lbracket'>[</span><span class='symbol'>:points</span><span class='comma'>,</span> <span class='symbol'>:lines</span><span class='comma'>,</span> <span class='symbol'>:spaces</span><span class='comma'>,</span> <span class='symbol'>:exits</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span></pre></dd>
+      
+        <dt id="PLACES_MAX_COUNT-constant" class="">PLACES_MAX_COUNT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Max amount of <span class='object_link'><a href="Place.html" title="Place (class)">places model</a></span> that each parking lot can have</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>20</span></pre></dd>
+      
+        <dt id="PERIOD_NORMALIZER-constant" class="">PERIOD_NORMALIZER =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Variable to indicate the standard time for the parking lot price</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>3600</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#calc_fee_by_hours-instance_method" title="#calc_fee_by_hours (instance method)">#<strong>calc_fee_by_hours</strong>(hours)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>It indicates the amount that will be charge by hours.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#parking_admin-instance_method" title="#parking_admin (instance method)">#<strong>parking_admin</strong>  &#x21d2; Admin Admin </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>With parking_admin role associated to the parking lot.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#parking_admin=-instance_method" title="#parking_admin= (instance method)">#<strong>parking_admin=</strong>(admin)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#town_manager-instance_method" title="#town_manager (instance method)">#<strong>town_manager</strong>  &#x21d2; Admin Admin </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>With town_manager role associated to the parking lot.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#town_manager=-instance_method" title="#town_manager= (instance method)">#<strong>town_manager=</strong>(admin)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="ApplicationRecord.html" title="ApplicationRecord (class)">ApplicationRecord</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="ApplicationRecord.html#human_attribute_name-class_method" title="ApplicationRecord.human_attribute_name (method)">human_attribute_name</a></span></p>
+
+  
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="calc_fee_by_hours-instance_method">
+  
+    #<strong>calc_fee_by_hours</strong>(hours)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>It indicates the amount that will be charge by hours</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'><p>Float</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+65
+66
+67
+68
+69</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/parking_lot.rb', line 65</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_calc_fee_by_hours'>calc_fee_by_hours</span><span class='lparen'>(</span><span class='id identifier rubyid_hours'>hours</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_hours'>hours</span>
+    <span class='id identifier rubyid_rate'>rate</span> <span class='op'>*</span> <span class='id identifier rubyid_hours'>hours</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="parking_admin-instance_method">
+  
+    #<strong>parking_admin</strong>  &#x21d2; <tt><span class='object_link'><a href="Admin.html" title="Admin (class)">Admin</a></span> <span class='object_link'><a href="Admin.html" title="Admin (class)">Admin</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns with parking_admin role associated to the parking lot.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Admin.html" title="Admin (class)">Admin</a></span> <span class='object_link'><a href="Admin.html" title="Admin (class)">Admin</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>with parking_admin role associated to the parking lot</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+72
+73
+74</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/parking_lot.rb', line 72</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_parking_admin'>parking_admin</span>
+  <span class='id identifier rubyid_parking_admins'>parking_admins</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="parking_admin=-instance_method">
+  
+    #<strong>parking_admin=</strong>(admin)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+81
+82
+83</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/parking_lot.rb', line 81</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_parking_admin='>parking_admin=</span><span class='lparen'>(</span><span class='id identifier rubyid_admin'>admin</span><span class='rparen'>)</span>
+  <span class='comment'># TODO: remove later
+</span><span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="town_manager-instance_method">
+  
+    #<strong>town_manager</strong>  &#x21d2; <tt><span class='object_link'><a href="Admin.html" title="Admin (class)">Admin</a></span> <span class='object_link'><a href="Admin.html" title="Admin (class)">Admin</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns with town_manager role associated to the parking lot.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Admin.html" title="Admin (class)">Admin</a></span> <span class='object_link'><a href="Admin.html" title="Admin (class)">Admin</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>with town_manager role associated to the parking lot</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+77
+78
+79</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/parking_lot.rb', line 77</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_town_manager'>town_manager</span>
+  <span class='id identifier rubyid_town_managers'>town_managers</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="town_manager=-instance_method">
+  
+    #<strong>town_manager=</strong>(admin)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+85
+86
+87</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/parking_lot.rb', line 85</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_town_manager='>town_manager=</span><span class='lparen'>(</span><span class='id identifier rubyid_admin'>admin</span><span class='rparen'>)</span>
+  <span class='comment'># TODO: remove later
+</span><span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Fri Feb 14 18:41:14 2020 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.22 (ruby-2.5.7).
+</div>
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # username: <%= ENV['DATABASE_USERNAME'] %>
+  # password: <%= ENV['DATABASE_PASSWORD'] %>
+  # host: <%= ENV['DATABASE_HOST'] %>
+  # port: <%= ENV.fetch('DATABASE_PORT') { 5432 } %>
+  pool: <%= ENV.fetch('RAILS_MAX_THREADS') { 5 } %>
+
+development:
+  <<: *default
+  database: parkings-app_development
+
+test:
+  <<: *default
+  database: parkings-app_test
+
+production:
+  <<: *default
+  database: <%= ENV['DATABASE_NAME'] %>

@@ -1,0 +1,10 @@
+en:
+  parking/log:
+    text:
+      confirm: Client confirmed session from %{device}
+      car_entrance_not_tracked: Session created without entrance detected
+      car_entrance: Car entered parking lot %{lot_name}
+      car_parked: Car parked at slot %{slot_name}
+      car_left: Car left slot %{slot_name}
+      car_exit: Car exit parking lot %{lot_name}
+      violation_commited: Violation commited at lot %{lot_name}

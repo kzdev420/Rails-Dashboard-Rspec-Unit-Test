@@ -1,0 +1,64 @@
+-# frozen_string_literal: true
+body
+
+  .container.my-4.p-5.bg-white
+    table.table.table-borderless
+      tbody
+        tr
+          td
+            | Parking lot name:
+          td
+            = @parking_lot.address
+            | #
+            = @parking_lot.id
+        tr
+          td
+            | Time of entry:
+          td
+            = formatted_datetime(Time.now)
+        tr
+          td
+            | License plate:
+          td
+            = @vehicle.plate_number
+        tr
+          td
+            | Manufacter:
+          td
+            = @vehicle.vehicle_type
+            '
+            = @vehicle.color
+        tr
+          td
+            | Parking slot ID:
+          td
+            = @parking_slot.id
+        tr
+          td
+            | Number of hours:
+          td
+            = params[:hours]
+        tr
+          td
+            | Parking zone price:
+          td
+            = @parking_lot.calc_fee_by_hours(params[:hours])
+        tr
+          td
+            | Time to leave:
+          td
+            = formatted_datetime(params[:hours].to_i.hours.from_now.localtime)
+
+  .container.my-4
+    i.fa.fa-exclamation-circle.text-info.pr-2
+    span.text-body
+      | Notice - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+  .container.d-flex.justify-content-around
+    = link_to :back do
+      button.btn.btn-lg.btn-info
+        i.fa.fa-angle-left
+        span.text-uppercase  Back
+    button.btn.btn-lg.btn-secondary disabled="disabled"
+      i.fa.fa-check
+      span.text-uppercase
+        | Confirm

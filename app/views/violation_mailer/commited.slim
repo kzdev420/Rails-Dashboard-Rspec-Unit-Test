@@ -1,0 +1,12 @@
+tr
+  td
+    p
+      | Hi, #{@email}!
+    p
+      | Parking rule #{@violation.rule.description} violated at #{@violation.created_at.in_time_zone('Eastern Time (US & Canada)')}!
+    p
+      | Car plate detected: #{@violation.session.vehicle.plate_number}
+    p
+      | Parking Space detected: #{@violation.session.parking_slot&.name}
+    p
+      | Parking Lot Address: #{@violation.session.parking_lot.full_address}

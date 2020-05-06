@@ -1,0 +1,5 @@
+en:
+  ticket_mailer:
+    ticket_changed:
+      status: status was changed from '%{from}' to '%{to}'
+      admin_id: was assigned to you

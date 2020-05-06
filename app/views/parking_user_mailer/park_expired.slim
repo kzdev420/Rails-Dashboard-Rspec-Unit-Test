@@ -1,0 +1,8 @@
+tr
+  td
+    p
+      | Your parking session for vehicle
+      strong  #{@session.vehicle.plate_number}
+      |  expired at #{formatted_datetime(@session.check_out)}. You may not extend it at this time. Please leave the parking space in
+      strong  #{( @session.overtime / 60).to_i}
+      |  minutes or less to avoid a violation ticket.

@@ -1,0 +1,51 @@
+.container-fluid
+  h2
+    | Tokens for Kiosk module authorization
+  p
+    | put this token in <code>Authorization</code> header for each request to backend
+
+  = form_for :token, url: dashboard_ksk_tokens_path, method: :post do |f|
+    .form-row.align-items-center
+      .col-auto.my-1
+        = f.text_field :name, class: 'form-control', placeholder: 'token name'
+      .col-auto.my-1
+        = f.select :kiosk_id, Kiosk.all.map { |k| [k.id, k.id] }, { prompt: 'Select kiosk' }, class: 'form-control', required: true
+      .col-auto.my-1
+        = f.submit 'create new token'
+      .col-auto.my-1
+        = link_to 'Run seeds', seed_dashboard_ksk_tokens_path, class: 'btn btn-primary'
+
+  br
+
+  table.table
+    thead
+      tr
+        th[scope="col"]
+          | #
+        th[scope="col"]
+          | name
+        th[scope="col"]
+          | token
+        th[scope="col"]
+          | created
+        th[scope="col"]
+          | last use
+        th[scope="col"]
+
+    tbody
+      - @tokens.each do |token|
+        tr
+          th[scope="row"]
+            = token.id
+          td
+            = token.name
+          td
+            code
+              = token.value
+          td
+            = token.created_at.strftime('%H:%M %F')
+          td
+            - if token.last_use
+              = token.last_use.strftime('%H:%M %F')
+          td
+            = link_to '✖', dashboard_ksk_token_path(token), method: :delete, class: 'text-danger'

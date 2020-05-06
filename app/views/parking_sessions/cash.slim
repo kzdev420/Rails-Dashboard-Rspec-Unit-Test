@@ -1,0 +1,54 @@
+-# frozen_string_literal: true
+body
+
+  .container.my-4.text-center
+    .row.d-flex.justify-content-center
+      span.text-uppercase
+        | Please insert the cash
+    .row
+      span
+        | (a possible denomination of 25)
+
+  .container.my-4.p-5.bg-white
+
+    - if params[:cash].to_i*0.25 < 0.5
+      .row.d-flex.justify-content-center.align-items-end
+        | introduced
+        h1.m-0
+          | $
+          = params[:cash].to_i*0.25
+        | /$0,5
+      .row.d-flex.justify-content-center
+        = form_tag edit_parking_session_path, method: :get
+          = hidden_field_tag :page, 'cash'
+          = hidden_field_tag :cash, params[:cash].to_i+1
+          = button_tag :submit, class: 'btn btn-lg bg-white btn-info' do
+            img src="/assets/push_cash.png"
+    - else
+      .row.d-flex.justify-content-center.align-items-end
+        | introduced
+        h1.m-0.text-info
+          | $
+          = params[:cash].to_i*0.25
+        .text-info
+          | /$0,5
+      .row.d-flex.justify-content-center
+          button.btn.btn-lg.bg-white
+            img src="/assets/push_cash.png"
+
+  .container.d-flex.justify-content-around
+    = link_to :back do
+      button.btn.btn-lg.btn-info
+        i.fa.fa-angle-left
+        span.text-uppercase
+          | Back
+    - if params[:cash].to_i*0.25 < 0.5
+      button.btn.btn-lg
+        span.text-uppercase.text-white
+          | Done
+    - else
+      = form_tag edit_parking_session_path, method: :get
+        = hidden_field_tag :page, 'done'
+        = button_tag :submit, class: 'btn btn-lg bg-white' do
+          span.text-uppercase
+            | Done
